@@ -1,0 +1,11 @@
+{
+"programs": {
+	"consul-template": {
+		"args": ["/consul-template", "-consul", "127.0.0.1:8500", "-template", "/prom.tmpl:/etc/prometheus/prometheus.yml /reload"]
+	},
+	"prometheus": {
+		"requires": [{"file": "/etc/prometheus/prometheus.yml"}],
+		"args": ["/prom"]
+	}
+}
+}

@@ -1,0 +1,18 @@
+Uses bifurcate and consul-template against the prometheus docker image.
+
+bifurcate: https://github.com/novilabs/bifurcate
+consul-template: https://github.com/hashicorp/consul-template
+
+setup a KV in consul: /prometheus/prometheus.yml
+with your config.
+
+./build.sh will build the docker image and push to your local registry(well you will have to edit build.sh to suit your local registry).
+
+then just docker run -p 9090 <localregistry>/prometheus
+
+FILES:
+prom = the script that starts prometheus (you will likely need to edit this to set your alertmanager url)
+bifurcate.json  = the config file for bifurcate to start consul-template and prometheus (you may have to edit this, to point at your consul service)
+build.sh = build script (you need to edit this for the docker tag/docker push lines to point to your registry (or remove them if not using a registry)
+prom.tmpl = template file for consul-template (you might want to edit this, if your consul key is different than /prometheus/prometheus.yml
+reload = the script that reloads prometheus -- called by consul-template on new KV update.

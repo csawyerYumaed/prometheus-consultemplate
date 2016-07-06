@@ -1,0 +1,2 @@
+#!/bin/sh
+PID=`ps | grep /bin/prometheus | grep -v grep | cut -c 3-6`; kill -SIGHUP $PID
